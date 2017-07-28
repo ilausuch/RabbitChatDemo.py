@@ -1,0 +1,82 @@
+<http>
+    <head>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<!--
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
+-->
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+        <script type="text/javascript" src="/static/chat.js"></script>
+        <script type="text/javascript" src="/static/app.js"></script>
+    </http>
+    <body ng-app="app" ng-controller="MainController as mc" >
+
+        <div class="card"
+            ng-if="!mc.loged"
+            style="width: 20rem; margin:auto; margin-top:5em; background-color:white">
+            <div class="card-block">
+                <h4 class="card-title">Connection</h4>
+                <div ng-if="!mc.loading">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Username"
+                            aria-describedby="basic-addon1" ng-model="mc.user">
+                    </div>
+                    <div class="input-group" style="margin-top:1em">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Talk with..."
+                            aria-describedby="basic-addon1" ng-model="mc.comunicateWith">
+                    </div>
+                </div>
+                <div class="input-group" ng-if="mc.loading">
+                    <div style="text-align:center;width: 100%;padding: 3em;">
+                        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:1em" ng-if="!mc.loading">
+                    <a href="#" class="btn btn-primary" ng-click="connect()"
+                    ng-if="mc.user && mc.comunicateWith">Connect</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card"
+            ng-if="mc.loged"
+            style="max-width: 600px; margin:auto; margin-top:5em; background-color:white">
+            <div class="card-block">
+                <h4 class="card-title">Chat ({{mc.user}})</h4>
+                <div style="border: 1px solid #EEE; margin-bottom:1em; padding:0.4em">
+                    <div style="overflow:auto; height:300px" id="chatContent">
+                        <p ng-repeat="item in mc.chat.conversation">
+                            {{item.from||"me"}} : {{item.text}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="mc.textToSend">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" ng-click="send()">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+
+    -->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    </body>
+</http>
